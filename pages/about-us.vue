@@ -1,10 +1,19 @@
 <script lang="ts" setup>
+useHead({ title: "About Us" });
 definePageMeta({ layout: "default" });
+const config = useRuntimeConfig();
+const { data: list, pending } = await useLazyAsyncData("about", () =>
+  $fetch(`${config.public.apiUrlAfl}/api/api.php/records/menuweb/2`, {
+    headers: {
+      "x-api-key": config.public.apiKeyAfl,
+    },
+  })
+);
 </script>
 
 <template>
   <div>
-    <h1 class="text-2xl" id="home">Main Content</h1>
+    <h1 class="text-2xl" id="home">{{ list.caption }}</h1>
     <p>
       Let's look at the base Tailwind classes that are used for this layout.
       There are 2 columns. The left sidebar (aside), and the main content area
