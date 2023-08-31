@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+useHead({ title: "Our Team" });
 const config = useRuntimeConfig();
 const { data: list, pending } = await useLazyAsyncData("people", () =>
   $fetch(
